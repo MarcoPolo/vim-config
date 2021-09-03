@@ -6,6 +6,12 @@
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils.inputs.nixpkgs.follows = "nixpkgs";
 
+    rnix-lsp = {
+      url = "github:nix-community/rnix-lsp";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
+
     nvim-lsp-config = {
       url = "github:neovim/nvim-lspconfig/master";
       flake = false;
@@ -13,6 +19,11 @@
 
     nvim-treesitter = {
       url = "github:nvim-treesitter/nvim-treesitter";
+      flake = false;
+    };
+
+    kommentary = {
+      url = "github:b3nj5m1n/kommentary";
       flake = false;
     };
 
@@ -49,13 +60,6 @@
           };
         in
           {
-            vimPlugins = (
-              builtins.trace "path ${(plugin inputs.nvim-lsp-config)}" [
-                (plugin inputs.nvim-lsp-config)
-                (plugin inputs.nvim-treesitter)
-                (plugin inputs.nvim-ts-rainbow)
-              ]
-            );
             homeManagerConfig.programs.neovim = {
               enable = true;
               package = inputs.neovim.defaultPackage.${system};
@@ -91,6 +95,14 @@
                       max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
                     }
                   }
+                  EOF
+                ''
+                ''
+                  lua << EOF
+                  require('kommentary.config').use_extended_mappings()
+                  vim.api.nvim_set_keymap("n", "gCX", "<Plug>kommentary_line_default", {})
+                  vim.api.nvim_set_keymap("v", "gCX", "<Plug>kommentary_visual_default", {})
+                  vim.api.nvim_set_keymap("i", "gCX", "<esc><Plug>kommentary_line_default", {})
                   EOF
                 ''
                 ''
@@ -213,7 +225,7 @@
               extraPackages = with pkgs; [
                 # used to compile tree-sitter grammar
                 tree-sitter
-                rnix-lsp
+                inputs.rnix-lsp.defaultPackage.${system}
 
                 # installs different langauge servers for neovim-lsp
                 # have a look on the link below to figure out the ones for your languages
@@ -235,6 +247,8 @@
                 # coc-tsserver
                 # coc-json
                 # coc-pairs
+                nerdtree
+                nerdtree-git-plugin
                 fugitive
                 vim-easymotion
                 vim-commentary
@@ -261,6 +275,7 @@
                 # rust-vim
 
                 # "Plug lambdalisue/suda.vim
+                (plugin inputs.kommentary)
                 (plugin inputs.nvim-treesitter)
                 (plugin inputs.nvim-lsp-config)
                 (plugin inputs.nvim-ts-rainbow)
