@@ -2,11 +2,11 @@
   "nodes": {
     "flake-utils": {
       "locked": {
-        "lastModified": 1623875721,
-        "narHash": "sha256-A8BU7bjS5GirpAUv4QA+QnJ4CceLHkcXdRp4xITDB0s=",
+        "lastModified": 1634851050,
+        "narHash": "sha256-N83GlSGPJJdcqhUxSCS/WwW5pksYf3VP1M13cDRTSVA=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "f7e004a55b120c02ecb6219596820fcd32ca8772",
+        "rev": "c91f3de5adaf1de973b797ef7485e441a65b8935",
         "type": "github"
       },
       "original": {
@@ -63,6 +63,22 @@
       "original": {
         "owner": "nixos",
         "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1635515046,
+        "narHash": "sha256-/DN65I6iP1RwJb/9N8r38B3zl1cXnGShbqEGSSaiL1I=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "f151bae7ab9bfdf6f125a2a03aad0ba6bf0589dc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -169,6 +185,7 @@
         "flake-utils": "flake-utils",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "nvim-lsp-config": "nvim-lsp-config",
         "nvim-treesitter": "nvim-treesitter",
         "nvim-ts-rainbow": "nvim-ts-rainbow",
