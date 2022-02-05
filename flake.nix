@@ -8,7 +8,6 @@
 
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
-      inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
 
