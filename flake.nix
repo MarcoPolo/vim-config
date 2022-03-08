@@ -6,6 +6,7 @@
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
       inputs.flake-utils.follows = "flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nvim-lsp-config = {
